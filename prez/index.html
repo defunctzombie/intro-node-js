@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<title>Intro to Node.js</title>
+<meta charset='utf-8'>
+<script src='js/slides.js'></script>
+
+<body style='display: none'>
+    <section class='slides layout-regular template-default'>
+        <article>
+            <h1>
+                Intro to node.js
+            </h1>
+            <p>
+                Roman Shtylman<br/>
+                @defunctzombie
+            </p>
+            <img style="position: absolute; left: 50%; top: 500px; margin-left: -135px;" src="img/logo.png"/>
+        </article>
+
+        <article class="build">
+            <h4>Stuffs</h4>
+            <ul>
+                <li>bitfloor.com</li>
+                <li>courseoff.com</li>
+                <li>balabolka.jit.su</li>
+                <li>some node.js modules (int, num, book, script, yummy, ...)</li>
+                <li>shtylman on github</li>
+            </ul>
+            <p>
+                I am happy to talk about any of these things!
+            </p>
+        </article>
+
+        <article class="build">
+            <h3>node.js</h3>
+            <ul class="build">
+                <li>javascript everywhere!</li>
+                <li>event based</li>
+                <li>great module system</li>
+                <li>still growing</li>
+                <li>
+                    secret ingredient in the web scale sauce
+                    <p>
+                    <center>
+                        <img src="img/web_sauce.jpg" height="250px"/>
+                    </center>
+                    </p>
+                </li>
+            </ul>
+        </article>
+
+        <article class="build">
+            <h3>hello world</h3>
+
+            <p>
+                The canonical node.js hello world example.
+            </p>
+
+<pre class="prettyprint lang-js">
+var http = require('http');
+
+http.createServer(function (request, response) {
+    response.writeHead(200, {'Content-Type': 'text/plain'});
+    response.end('Hello World\n');
+}).listen(8124);
+
+console.log('Server running at http://127.0.0.1:8124/');</pre>
+            <center><img src="http://i.imgur.com/FW8lK.jpg" height="225px"/></center>
+        </article>
+
+        <article class="build">
+            <h3>events! events! events!</h3>
+            <p>
+                Whether implicit or explicit, understanding callbacks is critical.
+            </p>
+            <h4>implicit - one shot</h4>
+            <p>
+                Passing a function directly to another function as a callback.
+            </p>
+<pre class="prettyprint lang-js">
+do_something(input, function(err, result) { ... });</pre>
+            <h4>explicit - many or single</h4>
+            <p>
+                Using the <em>EventEmitter</em> interface to connect callbacks.
+            </p>
+<pre class="prettyprint lang-js">
+instance.on('some event', function(result) { ... });</pre>
+            </p>
+        </article>
+
+        <article class="build">
+            <h3>hello world - take II</h3>
+            <p>
+                Lets expand the hello world example to be explicit in our event handling.
+            </p>
+            <p>
+                Allows us to see what is going on better and handle other events.
+            </p>
+            <p>
+                Not critical for this simple case. API choices are up to the devs.
+            </p>
+            <p>
+                <strong>Note:</strong> common practice is to see <em>err</em> as the first argument to single shot (implicit) callbacks. <strong>ALWAYS</strong> check for error before doing anything!!
+            </p>
+        </article>
+
+        <article class="build">
+            <h3>Chlorophyll? More like Borophyll!</h3>
+            <p>
+                I love proggit and want to know what the top 10 items are, NOW!
+            </p>
+            <p>
+                What if I want to make it reusable?
+            </p>
+            <p>
+                What about serving it up in a web browser?
+            </p>
+            <p>
+                How about for n00bs who want other subreddits?
+            </p>
+            <p>
+                <center>
+                    <img src="img/aliens.jpg" height="300px"/>
+                </center>
+            </p>
+        </article>
+
+        <article class="build">
+            <h3>modules</h3>
+            <p>
+                node.js core is intentionally small. 3rd party modules provide all the other "goodies" (this is by design)
+            </p>
+            <p>
+                modules can refer to both 3rd party modules you install as well as your own files. Both are exposed through the same interface <em>module.exports</em> and <em>require</em>
+            </p>
+            <p>
+                Understanding modules is crucial to becoming proficient in node.js land. <strong>DRY</strong>
+            </p>
+            <p>
+                Take time to read and understand the <a href="http://nodejs.org/api/modules.html">module docs</a>
+            </p>
+            <p>
+                Start using <a href="http://npmjs.org/">npm</a> from day one (today!).
+            </p>
+            <p>
+                Track your dependencies using a <em>package.json</em> file.<br/>
+                <em>npm init</em> will help you get started
+            </p>
+            <p>
+                Most importantly: use, create, share great modules!!
+            </p>
+        </article>
+
+        <article class="build">
+            <h3>common idioms</h3>
+            <p>
+                If I/O is performed, implicit callbacks generally return 'err' as the first argument.
+            </p>
+            <p>
+                Avoid callback soup and deep nesting by using modules and clear function separation.
+            </p>
+            <p>
+                Consolidate error handling, pass the errors up the callback chain.
+            </p>
+            <p>
+                testing! great for large projects, critical for smaller modules<br/>
+                <small>nothing says I love you like </small> <img src="img/build-badge.png">
+            </p>
+        </article>
+
+        <article class="build">
+            <h3>expressjs</h3>
+            <p>
+                Great for rapid prototyping and growing into something more.
+            </p>
+            <p>
+                Lightweight framework based on connect middleware stack.
+            </p>
+            <p>
+                Get the most out of it by using it "correctly". Understand what you are doing!<br/>
+                <small>true for any tool</small>
+            </p>
+            <p>
+                npm install express@3.0.0beta2
+            </p>
+        </article>
+
+        <article class="build">
+            <h3>references</h3>
+            <ul>
+                <li><a href="http://nodejs.org/api/">core docs</a></li>
+                <li><a href="http://npmjs.org/">npmjs</a></li>
+            </ul>
+            <h4>misc</h4>
+            <ul>
+                <li><a href="http://nodejs.org/community/">community</a></li>
+                <li>meetups</li>
+                <li>mailing list (google group)</li>
+                <li>IRC channel</li>
+            </ul>
+        </article>
+    </section>
+</body>
+</html>
